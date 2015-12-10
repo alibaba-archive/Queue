@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Queue.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:QueueDemo/QueueDemo.xcodeproj">
+   </FileRef>
 </Workspace>

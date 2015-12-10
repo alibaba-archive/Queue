@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Queue
 
 class QueueTests: XCTestCase {
     
@@ -21,8 +22,29 @@ class QueueTests: XCTestCase {
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let queue = Queue(queueName: "BackgroundQueue")
+        queue.addTaskCallback("Create") { (task) -> Void in
+            print("Create")
+            task.complete(nil)
+        }
+        
+        queue.addTaskCallback("Delete") { (task) -> Void in
+            
+            task.complete(nil)
+        }
+        
+        queue.addTaskCallback("Update") { (task) -> Void in
+            
+        }
+        
+        queue.addTaskCallback("Select") { (task) -> Void in
+            
+        }
+        
+        let task = QueueTask(queue: queue, type: "Create", data: nil, retries: 3)
+        let taskDelete = QueueTask(queue: queue, type: "Delete", data: nil, retries: 3)
+        queue.addOperation(taskDelete)
+        queue.addOperation(task)
     }
     
     func testPerformanceExample() {

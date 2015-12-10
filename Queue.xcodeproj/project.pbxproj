@@ -10,6 +10,8 @@
 		E55AFA011C192017001C26B3 /* QueueTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA001C192017001C26B3 /* QueueTask.swift */; };
 		E55AFA091C192E2A001C26B3 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA081C192E2A001C26B3 /* QueueTests.swift */; };
 		E55AFA0B1C192E2A001C26B3 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C2C3A01C181528003348D8 /* Queue.framework */; };
+		E55AFA321C194B65001C26B3 /* QueueSerializationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA311C194B65001C26B3 /* QueueSerializationProvider.swift */; };
+		E55AFA341C194C8D001C26B3 /* NSUserDefaultsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */; };
 		E5C2C3A41C181528003348D8 /* Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C3A31C181528003348D8 /* Queue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E5C2C3AC1C181A16003348D8 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C3AB1C181A16003348D8 /* Queue.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,8 @@
 		E55AFA061C192E2A001C26B3 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55AFA081C192E2A001C26B3 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		E55AFA0A1C192E2A001C26B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E55AFA311C194B65001C26B3 /* QueueSerializationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueSerializationProvider.swift; sourceTree = "<group>"; };
+		E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsSerializer.swift; sourceTree = "<group>"; };
 		E5C2C3A01C181528003348D8 /* Queue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Queue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C2C3A31C181528003348D8 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		E5C2C3A51C181528003348D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 				E5C2C3A31C181528003348D8 /* Queue.h */,
 				E5C2C3AB1C181A16003348D8 /* Queue.swift */,
 				E55AFA001C192017001C26B3 /* QueueTask.swift */,
+				E55AFA311C194B65001C26B3 /* QueueSerializationProvider.swift */,
+				E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */,
 				E5C2C3A51C181528003348D8 /* Info.plist */,
 			);
 			path = Queue;
@@ -208,8 +214,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E55AFA321C194B65001C26B3 /* QueueSerializationProvider.swift in Sources */,
 				E55AFA011C192017001C26B3 /* QueueTask.swift in Sources */,
 				E5C2C3AC1C181A16003348D8 /* Queue.swift in Sources */,
+				E55AFA341C194C8D001C26B3 /* NSUserDefaultsSerializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +386,7 @@
 				E55AFA101C192E2A001C26B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E5C2C39A1C181528003348D8 /* Build configuration list for PBXProject "Queue" */ = {
 			isa = XCConfigurationList;

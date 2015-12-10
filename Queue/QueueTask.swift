@@ -15,7 +15,9 @@ public typealias TaskCompleteCallback = (QueueTask, NSError?) -> Void
 public class QueueTask: NSOperation {
     
     public let queue: Queue
-    
+    public var taskID: String
+    public var taskType: String
+    public var retries: Int
     var _executing: Bool = false
     var _finished: Bool = false
     
@@ -41,7 +43,9 @@ public class QueueTask: NSOperation {
         created: NSDate = NSDate(), started: NSDate? = nil ,
         retries: Int = 0) {
             self.queue = queue
-            
+            self.taskID = taskID ?? NSUUID().UUIDString
+            self.taskType = taskType
+            self.retries = retries
         super.init()
     }
     
@@ -69,5 +73,26 @@ public class QueueTask: NSOperation {
         queue.runTask(self)
     }
     
+    /**
+     invoke the method to tell the queue if has error when the task complete
+     
+     - parameter error: error
+     */
+    public func complete(error: NSError?) {
+        if (!executing) {
+            return
+        }
+        
+        if let _ = error {
+            if ++retries >= queue.maxRetries {
+                cancel()
+                return
+            }
+            self.run()
+        } else {
+            print("Task \(taskID) completed")
+            finished = true
+        }
+    }
     
 }
