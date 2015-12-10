@@ -13,28 +13,28 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let queue = Queue(queueName: "BackgroundQueue")
-        queue.addTaskCallback("Create") { (task) -> Bool in
+        
+        let queue = Queue(queueName: "", maxConcurrency: 1, maxRetries: 3, serializationProvider: nil, logProvider: ConsoleLogger())
+        queue.addTaskCallback("Create") { (task) -> Void in
             print("Create")
-            return true
+            task.complete(nil)
         }
         
-        queue.addTaskCallback("Delete") { (task) -> Bool in
-            print("Delete")
-            return false
+        queue.addTaskCallback("Delete") { (task) -> Void in
+            
+            task.complete(nil)
         }
         
-        queue.addTaskCallback("Update") { (task) -> Bool in
-            return true
+        queue.addTaskCallback("Update") { (task) -> Void in
+            
         }
         
-        queue.addTaskCallback("Select") { (task) -> Bool in
-            return true
+        queue.addTaskCallback("Select") { (task) -> Void in
+            
         }
         
-        
-        let task = QueueTask(queue: queue, type: "Create", data: nil, retries: 3)
-        let taskDelete = QueueTask(queue: queue, type: "Delete", data: nil, retries: 3)
+        let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 3)
+        let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 3)
         queue.addOperation(taskDelete)
         queue.addOperation(task)
     }

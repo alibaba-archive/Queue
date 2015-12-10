@@ -4,7 +4,7 @@
 //
 //  Created by ChenHao on 12/9/15.
 //  Copyright © 2015 HarriesChen. All rights reserved.
-//ha
+//
 
 #import <UIKit/UIKit.h>
 

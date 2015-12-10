@@ -10,17 +10,21 @@ import Foundation
 
 public class Queue: NSOperationQueue {
     
+    /// the max times of retries when the task failing
     public let maxRetries: Int
     var taskCallbacks = [String: TaskCallBack]()
     var taskList = [String: QueueTask]()
     let serializationProvider: QueueSerializationProvider?
+    let logProvider: QueueLogProvider?
     
     public required init(queueName: String, maxConcurrency: Int = 1,
         maxRetries: Int = 5,
-        serializationProvider: QueueSerializationProvider? = nil) {
+        serializationProvider: QueueSerializationProvider? = nil,
+        logProvider: QueueLogProvider? = nil) {
             
             self.maxRetries = maxRetries
             self.serializationProvider = serializationProvider
+            self.logProvider = logProvider
             super.init()
             self.name = queueName
             self.maxConcurrentOperationCount = maxConcurrency

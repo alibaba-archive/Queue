@@ -18,8 +18,14 @@ public class QueueTask: NSOperation {
     public var taskID: String
     public var taskType: String
     public var retries: Int
+    public let created: NSDate
+    public var started: NSDate?
+    public var userInfo: AnyObject?
+    
     var _executing: Bool = false
     var _finished: Bool = false
+    
+    public override var name: String? {get {return taskID } set { } }
     
     public override var executing: Bool {
         get { return _executing }
@@ -38,19 +44,33 @@ public class QueueTask: NSOperation {
         }
     }
     
-    
-    private init(queue: Queue, taskID: String? = nil, taskType: String, data: AnyObject? = nil,
+    /**
+     Initializes a new QueueTask with following paramsters
+     
+     - parameter queue:    the queue the execute the task
+     - parameter taskID:   A unique identifer for the task
+     - parameter taskType: A type that will be used to group tasks together, tasks have to be generic with respect to their type
+     - parameter userInfo: other infomation
+     - parameter created:  When the task was created
+     - parameter started:  When the task was started first time
+     - parameter retries:  Number of times this task has been retries after failing
+     
+     - returns: A new QueueTask
+     */
+    private init(queue: Queue, taskID: String? = nil, taskType: String, userInfo: AnyObject? = nil,
         created: NSDate = NSDate(), started: NSDate? = nil ,
         retries: Int = 0) {
             self.queue = queue
             self.taskID = taskID ?? NSUUID().UUIDString
             self.taskType = taskType
             self.retries = retries
+            self.created = created
+            self.userInfo = userInfo
         super.init()
     }
     
-    public convenience init(queue: Queue, type: String, data: AnyObject? = nil, retries: Int = 0) {
-        self.init(queue:queue, taskType: type, data:data, retries:retries)
+    public convenience init(queue: Queue, type: String, userInfo: AnyObject? = nil, retries: Int = 0) {
+        self.init(queue:queue, taskType: type, userInfo:userInfo, retries:retries)
     }
     
     public override func start() {
@@ -82,7 +102,6 @@ public class QueueTask: NSOperation {
         if (!executing) {
             return
         }
-        
         if let _ = error {
             if ++retries >= queue.maxRetries {
                 cancel()

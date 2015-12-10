@@ -11,6 +11,8 @@ import UIKit
 /// comfire the QueueSerializationProvider protocol to persistent the queue to the NSUserdefualts
 public class NSUserDefaultsSerializer: QueueSerializationProvider {
 
+    public init() { }
+    
     public func serializeTask(task: QueueTask, queueName: String) {
         
     }

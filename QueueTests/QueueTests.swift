@@ -22,7 +22,7 @@ class QueueTests: XCTestCase {
     }
     
     func testExample() {
-        let queue = Queue(queueName: "BackgroundQueue")
+        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 3, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
         queue.addTaskCallback("Create") { (task) -> Void in
             print("Create")
             task.complete(nil)
@@ -41,8 +41,8 @@ class QueueTests: XCTestCase {
             
         }
         
-        let task = QueueTask(queue: queue, type: "Create", data: nil, retries: 3)
-        let taskDelete = QueueTask(queue: queue, type: "Delete", data: nil, retries: 3)
+        let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 3)
+        let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 3)
         queue.addOperation(taskDelete)
         queue.addOperation(task)
     }

@@ -14,6 +14,8 @@
 		E55AFA341C194C8D001C26B3 /* NSUserDefaultsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */; };
 		E5C2C3A41C181528003348D8 /* Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C3A31C181528003348D8 /* Queue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E5C2C3AC1C181A16003348D8 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C3AB1C181A16003348D8 /* Queue.swift */; };
+		E5CF3F9F1C19715100704547 /* QueueLogProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF3F9E1C19715100704547 /* QueueLogProvider.swift */; };
+		E5CF3FA11C19722F00704547 /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF3FA01C19722F00704547 /* ConsoleLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		E5C2C3A31C181528003348D8 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		E5C2C3A51C181528003348D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5C2C3AB1C181A16003348D8 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		E5CF3F9E1C19715100704547 /* QueueLogProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueLogProvider.swift; sourceTree = "<group>"; };
+		E5CF3FA01C19722F00704547 /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 				E55AFA001C192017001C26B3 /* QueueTask.swift */,
 				E55AFA311C194B65001C26B3 /* QueueSerializationProvider.swift */,
 				E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */,
+				E5CF3F9E1C19715100704547 /* QueueLogProvider.swift */,
+				E5CF3FA01C19722F00704547 /* ConsoleLogger.swift */,
 				E5C2C3A51C181528003348D8 /* Info.plist */,
 			);
 			path = Queue;
@@ -216,8 +222,10 @@
 			files = (
 				E55AFA321C194B65001C26B3 /* QueueSerializationProvider.swift in Sources */,
 				E55AFA011C192017001C26B3 /* QueueTask.swift in Sources */,
+				E5CF3F9F1C19715100704547 /* QueueLogProvider.swift in Sources */,
 				E5C2C3AC1C181A16003348D8 /* Queue.swift in Sources */,
 				E55AFA341C194C8D001C26B3 /* NSUserDefaultsSerializer.swift in Sources */,
+				E5CF3FA11C19722F00704547 /* ConsoleLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
