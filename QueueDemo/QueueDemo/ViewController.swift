@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let queue = Queue(queueName: "", maxConcurrency: 1, maxRetries: 3, serializationProvider: nil, logProvider: ConsoleLogger())
+        let queue = Queue(queueName: "", maxConcurrency: 1, maxRetries: 3, serializationProvider: NSUserDefaultsSerializer(), logProvider: ConsoleLogger())
         queue.addTaskCallback("Create") { (task) -> Void in
             print("Create")
             task.complete(nil)

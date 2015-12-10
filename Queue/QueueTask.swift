@@ -73,6 +73,34 @@ public class QueueTask: NSOperation {
         self.init(queue:queue, taskType: type, userInfo:userInfo, retries:retries)
     }
     
+    public func toJSONString() -> String? {
+        let dict = toDictionary()
+        
+        let nsdict = NSMutableDictionary(capacity: dict.count)
+        for (key, value) in dict {
+            nsdict[key] = value ?? NSNull()
+        }
+        do {
+            let json = try toJSON(nsdict)
+            return json
+        } catch {
+            return nil
+        }
+    }
+    
+    private func toJSON(obj: AnyObject) throws -> String? {
+        let json = try NSJSONSerialization.dataWithJSONObject(obj, options: [])
+        return NSString(data: json, encoding: NSUTF8StringEncoding) as String?
+    }
+    
+    public func toDictionary() -> [String: AnyObject?] {
+        var dict = [String: AnyObject?]()
+        
+        dict["taskID"] = self.taskID
+        dict["taskType"] = self.taskType
+        return dict
+    }
+    
     public override func start() {
         super.start()
         executing = true

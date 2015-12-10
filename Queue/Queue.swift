@@ -50,6 +50,7 @@ public class Queue: NSOperationQueue {
             taskList[task.taskID] = task
             print(taskList)
         }
+        op.completionBlock = { self.taskComplete(op) }
         super.addOperation(op)
     }
     

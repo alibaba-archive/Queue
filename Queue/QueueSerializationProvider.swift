@@ -9,7 +9,7 @@
 /**
 *  comfire to this protocol to provide serialization Queue
 */
-public protocol QueueSerializationProvider: NSObjectProtocol {
+public protocol QueueSerializationProvider {
     func serializeTask(task: QueueTask, queueName: String)
     func deserialzeTasksInQueue(queue: Queue) -> [QueueTask]
     func removeTask(taskID: String, queue: Queue)

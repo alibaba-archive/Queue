@@ -10,8 +10,6 @@ import UIKit
 
 public class ConsoleLogger: QueueLogProvider {
     
-    public init() {}
-    
     public func log(level: LogLevel, msg: String) {
         print("[\(level.rawValue)] \(msg)")
     }

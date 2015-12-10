@@ -16,7 +16,7 @@ public enum LogLevel: Int {
     case Error
 }
 
-public protocol QueueLogProvider: NSObjectProtocol {
+public protocol QueueLogProvider {
 
     func log(level: LogLevel, msg: String)
 }
