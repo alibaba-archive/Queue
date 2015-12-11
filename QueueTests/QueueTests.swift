@@ -23,11 +23,11 @@ class QueueTests: XCTestCase {
     
     func testExample() {
         let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
-        
+        queue.loadSerializeTaskToQueue()
         var i = 0
         for i = 0; i < 100; i++ {
             queue.addTaskCallback("Create") { (task) -> Void in
-                sleep(500)
+                
                 task.complete(nil)
             }
             
@@ -49,6 +49,7 @@ class QueueTests: XCTestCase {
             queue.addOperation(taskDelete)
             queue.addOperation(task)
         }
+        
     }
     
     func testPerformanceExample() {

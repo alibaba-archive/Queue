@@ -14,10 +14,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let queue = Queue(queueName: "NetWorking", maxConcurrency: 5, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
-        
+        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
+        queue.loadSerializeTaskToQueue()
         var i = 0
-        for i = 0; i < 100; i++ {
+        for i = 0; i < 0; i++ {
             queue.addTaskCallback("Create") { (task) -> Void in
                 sleep(1)
                 print("finish create task")
@@ -29,11 +29,14 @@ class ViewController: UIViewController {
                 task.complete(NSError(domain: "dsfs", code: 22, userInfo: nil))
             }
             
-            let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 3)
-            let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 3)
+            let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 0)
+            let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 0)
             queue.addOperation(taskDelete)
             queue.addOperation(task)
         }
+        
+        queue.pause()
+        queue.start()
     }
 
     override func didReceiveMemoryWarning() {

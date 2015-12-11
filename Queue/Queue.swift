@@ -30,6 +30,25 @@ public class Queue: NSOperationQueue {
             self.maxConcurrentOperationCount = maxConcurrency
     }
     
+    
+    /**
+     load the unfinish tasks to Queue
+     */
+    public func loadSerializeTaskToQueue() {
+        let tasks = serializationProvider?.deserialzeTasksInQueue(self)
+        for task in tasks! {
+            addDeserializedTask(task)
+        }
+    }
+    
+    public func addDeserializedTask(task: QueueTask) {
+        if taskList[task.taskID] != nil {
+            return
+        }
+        task.completionBlock = { self.taskComplete(task)}
+        super.addOperation(task)
+    }
+    
     /**
      register a callback for type of queuetask
      
@@ -60,7 +79,6 @@ public class Queue: NSOperationQueue {
     public func pause() {
         self.suspended = true
     }
-    
     
     func runTask(task: QueueTask) {
         if let callback = taskCallbacks[task.taskType] {

@@ -149,6 +149,7 @@ public class QueueTask: NSOperation {
         if let _ = error {
             if ++retries >= queue.maxRetries {
                 cancel()
+                queue.log(LogLevel.Trace, msg: "Task \(taskID) failed \(queue.taskList.count) tasks left")
                 return
             }
             queue.log(LogLevel.Debug, msg: "Task \(taskID) retry \(retries) times")
