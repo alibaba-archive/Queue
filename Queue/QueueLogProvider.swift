@@ -14,9 +14,18 @@ public enum LogLevel: Int {
     case Info
     case Warning
     case Error
+    
+    public func toString() -> String {
+        switch (self) {
+        case .Trace:   return "Trace"
+        case .Debug:   return "Debug"
+        case .Info:    return "Info"
+        case .Warning: return "Warning"
+        case .Error:   return "Error"
+        }
+    }
 }
 
 public protocol QueueLogProvider {
-
     func log(level: LogLevel, msg: String)
 }

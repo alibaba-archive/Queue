@@ -48,17 +48,25 @@ public class Queue: NSOperationQueue {
     public override func addOperation(op: NSOperation) {
         if let task = op as? QueueTask {
             taskList[task.taskID] = task
-            print(taskList)
         }
         op.completionBlock = { self.taskComplete(op) }
         super.addOperation(op)
     }
     
+    public func start() {
+        self.suspended = false
+    }
+    
+    public func pause() {
+        self.suspended = true
+    }
+    
+    
     func runTask(task: QueueTask) {
         if let callback = taskCallbacks[task.taskType] {
              callback(task)
         } else {
-            print("no callback registerd for task")
+            log(LogLevel.Error, msg: "no callback registerd for task")
         }
     }
     
@@ -66,6 +74,10 @@ public class Queue: NSOperationQueue {
         if let task = op as? QueueTask {
             taskList.removeValueForKey(task.taskID)
         }
+    }
+    
+    func log(level: LogLevel, msg: String) {
+        logProvider?.log(level, msg: msg)
     }
 
 }

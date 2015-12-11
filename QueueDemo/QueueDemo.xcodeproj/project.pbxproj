@@ -22,6 +22,7 @@
 		E55AFA261C1946C1001C26B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E55AFA291C1946C1001C26B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E55AFA2B1C1946C1001C26B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5DD677D1C1AB339006086FC /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Queue-ekvihtzrxbsizyecszasnebqznnf/Build/Products/Debug-iphoneos/Queue.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +39,7 @@
 		E55AFA131C1946C1001C26B3 = {
 			isa = PBXGroup;
 			children = (
+				E5DD677D1C1AB339006086FC /* Queue.framework */,
 				E55AFA1E1C1946C1001C26B3 /* QueueDemo */,
 				E55AFA1D1C1946C1001C26B3 /* Products */,
 			);
@@ -284,6 +286,7 @@
 				E55AFA301C1946C1001C26B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

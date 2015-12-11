@@ -10,7 +10,7 @@ import Foundation
 
 public typealias TaskCallBack = (QueueTask) -> Void
 public typealias TaskCompleteCallback = (QueueTask, NSError?) -> Void
-
+public typealias JSONDictionary = [String: AnyObject]
 
 public class QueueTask: NSOperation {
     
@@ -44,6 +44,8 @@ public class QueueTask: NSOperation {
         }
     }
     
+    
+    // MARK: - Init
     /**
      Initializes a new QueueTask with following paramsters
      
@@ -73,6 +75,36 @@ public class QueueTask: NSOperation {
         self.init(queue:queue, taskType: type, userInfo:userInfo, retries:retries)
     }
     
+    public convenience init?(dictionary: JSONDictionary, queue: Queue) {
+        if  let taskID = dictionary["taskID"] as? String,
+            let taskType = dictionary["taskType"] as? String,
+            let data: AnyObject? = dictionary["userInfo"] as AnyObject??,
+            let createdStr = dictionary["created"] as? String,
+            let startedStr: String? = dictionary["started"] as? String ?? nil,
+            let retries = dictionary["retries"] as? Int? ?? 0
+        {
+            let created = NSDate(dateString: createdStr) ?? NSDate()
+            let started = (startedStr != nil) ? NSDate(dateString: startedStr!) : nil
+            self.init(queue: queue, taskID: taskID, taskType: taskType, userInfo: data, created: created,
+                started: started, retries: retries)
+        } else {
+            self.init(queue: queue, taskID: "", taskType: "")
+            return nil
+        }
+    }
+    
+    public convenience init?(json: String, queue: Queue) {
+        do {
+            if let dict = try fromJSON(json) as? [String: AnyObject] {
+                self.init(dictionary: dict, queue: queue)
+            } else {
+                return nil
+            }
+        } catch {
+            return nil
+        }
+    }
+    
     public func toJSONString() -> String? {
         let dict = toDictionary()
         
@@ -88,28 +120,12 @@ public class QueueTask: NSOperation {
         }
     }
     
-    private func toJSON(obj: AnyObject) throws -> String? {
-        let json = try NSJSONSerialization.dataWithJSONObject(obj, options: [])
-        return NSString(data: json, encoding: NSUTF8StringEncoding) as String?
-    }
-    
     public func toDictionary() -> [String: AnyObject?] {
         var dict = [String: AnyObject?]()
         
         dict["taskID"] = self.taskID
         dict["taskType"] = self.taskType
         return dict
-    }
-    
-    public override func start() {
-        super.start()
-        executing = true
-        run()
-    }
-    
-    public override func cancel() {
-        super.cancel()
-        finished = true
     }
     
     /**
@@ -124,7 +140,7 @@ public class QueueTask: NSOperation {
     /**
      invoke the method to tell the queue if has error when the task complete
      
-     - parameter error: error
+     - parameter error: if the task failed, pass an error to indicate why
      */
     public func complete(error: NSError?) {
         if (!executing) {
@@ -135,11 +151,85 @@ public class QueueTask: NSOperation {
                 cancel()
                 return
             }
+            queue.log(LogLevel.Debug, msg: "Task \(taskID) retry \(retries) times")
             self.run()
         } else {
-            print("Task \(taskID) completed")
+            queue.log(LogLevel.Trace, msg: "Task \(taskID) completed \(queue.taskList.count) tasks left")
             finished = true
         }
     }
     
+    // MARK: - overide method
+    public override func start() {
+        super.start()
+        executing = true
+        run()
+    }
+    
+    public override func cancel() {
+        super.cancel()
+        finished = true
+    }
+    
+    
+}
+
+//  MARK: - NSDate extention
+extension NSDate {
+    convenience init?(dateString:String) {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
+        if let d = formatter.dateFromString(dateString) {
+            self.init(timeInterval:0, sinceDate:d)
+        } else {
+            self.init(timeInterval:0, sinceDate:NSDate())
+            return nil
+        }
+    }
+    
+    var isoFormatter: ISOFormatter {
+        if let formatter = objc_getAssociatedObject(self, "formatter") as? ISOFormatter {
+            return formatter
+        } else {
+            let formatter = ISOFormatter()
+            objc_setAssociatedObject(self, "formatter", formatter, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            return formatter
+        }
+    }
+    
+    func toISOString() -> String {
+        return self.isoFormatter.stringFromDate(self)
+    }
+}
+
+class ISOFormatter : NSDateFormatter {
+    override init() {
+        super.init()
+        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
+        self.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        self.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)!
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+//  MARK: - Hepler
+private func toJSON(obj: AnyObject) throws -> String? {
+    let json = try NSJSONSerialization.dataWithJSONObject(obj, options: [])
+    return NSString(data: json, encoding: NSUTF8StringEncoding) as String?
+}
+
+private func fromJSON(str: String) throws -> AnyObject? {
+    if let json = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+        let obj: AnyObject = try NSJSONSerialization.JSONObjectWithData(json, options: .AllowFragments)
+        return obj
+    }
+    return nil
+}
+
+private func runInBackgroundAfter(seconds: NSTimeInterval, callback:dispatch_block_t) {
+    let delta = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds) * Int64(NSEC_PER_SEC))
+    dispatch_after(delta, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), callback)
 }

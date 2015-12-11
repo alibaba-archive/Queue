@@ -22,29 +22,33 @@ class QueueTests: XCTestCase {
     }
     
     func testExample() {
-        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 3, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
-        queue.addTaskCallback("Create") { (task) -> Void in
-            print("Create")
-            task.complete(nil)
-        }
+        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
         
-        queue.addTaskCallback("Delete") { (task) -> Void in
+        var i = 0
+        for i = 0; i < 100; i++ {
+            queue.addTaskCallback("Create") { (task) -> Void in
+                sleep(500)
+                task.complete(nil)
+            }
             
-            task.complete(nil)
-        }
-        
-        queue.addTaskCallback("Update") { (task) -> Void in
+            queue.addTaskCallback("Delete") { (task) -> Void in
+                
+                task.complete(NSError(domain: "dsfs", code: 22, userInfo: nil))
+            }
             
-        }
-        
-        queue.addTaskCallback("Select") { (task) -> Void in
+            queue.addTaskCallback("Update") { (task) -> Void in
+                task.complete(nil)
+            }
             
+            queue.addTaskCallback("Select") { (task) -> Void in
+                task.complete(nil)
+            }
+            
+            let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 3)
+            let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 3)
+            queue.addOperation(taskDelete)
+            queue.addOperation(task)
         }
-        
-        let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 3)
-        let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 3)
-        queue.addOperation(taskDelete)
-        queue.addOperation(task)
     }
     
     func testPerformanceExample() {
