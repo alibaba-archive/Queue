@@ -41,6 +41,11 @@ public class Queue: NSOperationQueue {
         }
     }
     
+    /**
+     addDeserializedTask
+     
+     - parameter task: task array
+     */
     public func addDeserializedTask(task: QueueTask) {
         if taskList[task.taskID] != nil {
             return
