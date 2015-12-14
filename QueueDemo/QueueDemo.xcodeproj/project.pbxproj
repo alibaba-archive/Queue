@@ -12,6 +12,7 @@
 		E55AFA251C1946C1001C26B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E55AFA231C1946C1001C26B3 /* Main.storyboard */; };
 		E55AFA271C1946C1001C26B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E55AFA261C1946C1001C26B3 /* Assets.xcassets */; };
 		E55AFA2A1C1946C1001C26B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E55AFA281C1946C1001C26B3 /* LaunchScreen.storyboard */; };
+		E5EBD2CE1C1E5EBD00BCBE6A /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5EBD2CD1C1E5EBD00BCBE6A /* Queue.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +23,7 @@
 		E55AFA261C1946C1001C26B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E55AFA291C1946C1001C26B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E55AFA2B1C1946C1001C26B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5DD677D1C1AB339006086FC /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Queue-ekvihtzrxbsizyecszasnebqznnf/Build/Products/Debug-iphoneos/Queue.framework"; sourceTree = "<group>"; };
+		E5EBD2CD1C1E5EBD00BCBE6A /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Queue-ekvihtzrxbsizyecszasnebqznnf/Build/Products/Debug-iphoneos/Queue.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5EBD2CE1C1E5EBD00BCBE6A /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,7 +41,7 @@
 		E55AFA131C1946C1001C26B3 = {
 			isa = PBXGroup;
 			children = (
-				E5DD677D1C1AB339006086FC /* Queue.framework */,
+				E5EBD2CD1C1E5EBD00BCBE6A /* Queue.framework */,
 				E55AFA1E1C1946C1001C26B3 /* QueueDemo */,
 				E55AFA1D1C1946C1001C26B3 /* Products */,
 			);

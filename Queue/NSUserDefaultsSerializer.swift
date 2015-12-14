@@ -25,8 +25,10 @@ public class NSUserDefaultsSerializer: QueueSerializationProvider {
                 stringArray = [serialized]
             }
             defaults.setValue(stringArray, forKey: queueName)
+            defaults.synchronize()
+            print("序列化成功")
         } else {
-            
+            print("序列化失败")
         }
     }
     
@@ -34,6 +36,9 @@ public class NSUserDefaultsSerializer: QueueSerializationProvider {
         let defaults = NSUserDefaults.standardUserDefaults()
         if  let queneName = queue.name,
             let stringArray = defaults.stringArrayForKey(queneName) {
+                print(stringArray.count)
+                    //.map { return QueueTask(json: $0, queue: queue)})
+                
                 return stringArray
                     .map { return QueueTask(json: $0, queue: queue)}
                     .filter { return $0 != nil }

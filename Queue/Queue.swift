@@ -30,15 +30,22 @@ public class Queue: NSOperationQueue {
             self.maxConcurrentOperationCount = maxConcurrency
     }
     
+    public func hasUnfinishedTask() -> Bool {
+        return serializationProvider?.deserialzeTasksInQueue(self).count > 0
+    }
     
     /**
      load the unfinish tasks to Queue
      */
     public func loadSerializeTaskToQueue() {
+        self.pause()
+        log(LogLevel.Trace, msg: "暂停队列 载入序列化任务")
         let tasks = serializationProvider?.deserialzeTasksInQueue(self)
         for task in tasks! {
             addDeserializedTask(task)
         }
+        log(LogLevel.Trace, msg: "载入成功 队列启动")
+        self.start()
     }
     
     /**
@@ -50,6 +57,7 @@ public class Queue: NSOperationQueue {
         if taskList[task.taskID] != nil {
             return
         }
+        taskList[task.taskID] = task
         task.completionBlock = { self.taskComplete(task)}
         super.addOperation(task)
     }
@@ -71,7 +79,14 @@ public class Queue: NSOperationQueue {
      */
     public override func addOperation(op: NSOperation) {
         if let task = op as? QueueTask {
+            if taskList[task.taskID] != nil {
+                log(.Warning, msg: "Attempted to add duplicate task\(task.taskID)")
+            }
             taskList[task.taskID] = task
+            if  let sp = serializationProvider,
+                let queueName = task.queue.name {
+                sp.serializeTask(task, queueName: queueName)
+            }
         }
         op.completionBlock = { self.taskComplete(op) }
         super.addOperation(op)
@@ -96,6 +111,10 @@ public class Queue: NSOperationQueue {
     func taskComplete(op: NSOperation) {
         if let task = op as? QueueTask {
             taskList.removeValueForKey(task.taskID)
+            
+            if let sp = serializationProvider {
+                sp.removeTask(task.taskID, queue: task.queue)
+            }
         }
     }
     

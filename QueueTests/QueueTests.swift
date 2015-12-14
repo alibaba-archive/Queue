@@ -23,6 +23,13 @@ class QueueTests: XCTestCase {
     
     func testExample() {
         let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
+        
+        if queue.hasUnfinishedTask() {
+            print("存在未完成任务")
+        } else {
+            print("不存在未完成任务")
+        }
+        
         queue.loadSerializeTaskToQueue()
         var i = 0
         for i = 0; i < 100; i++ {

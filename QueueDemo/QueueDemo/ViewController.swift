@@ -15,19 +15,28 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
-        queue.loadSerializeTaskToQueue()
+        queue.addTaskCallback("Create") { (task) -> Void in
+            sleep(1)
+            print("finish create task")
+            task.complete(nil)
+        }
+        
+        queue.addTaskCallback("Delete") { (task) -> Void in
+            print("finish Delete task")
+            task.complete(NSError(domain: "dsfs", code: 22, userInfo: nil))
+        }
+        var taskNUmber = 0
+        if queue.hasUnfinishedTask() {
+            print("存在未完成任务")
+            queue.loadSerializeTaskToQueue()
+        } else {
+            print("不存在未完成任务")
+            taskNUmber = 100
+        }
+        
         var i = 0
-        for i = 0; i < 0; i++ {
-            queue.addTaskCallback("Create") { (task) -> Void in
-                sleep(1)
-                print("finish create task")
-                task.complete(nil)
-            }
+        for i = 0; i < taskNUmber; i++ {
             
-            queue.addTaskCallback("Delete") { (task) -> Void in
-                print("finish Delete task")
-                task.complete(NSError(domain: "dsfs", code: 22, userInfo: nil))
-            }
             
             let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 0)
             let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 0)

@@ -125,6 +125,10 @@ public class QueueTask: NSOperation {
         
         dict["taskID"] = self.taskID
         dict["taskType"] = self.taskType
+        dict["created"] = self.created.toISOString()
+        dict["started"] = (self.started != nil) ? self.started!.toISOString() : nil
+        dict["retries"] = self.retries
+        dict["userInfo"] = self.userInfo
         return dict
     }
     
