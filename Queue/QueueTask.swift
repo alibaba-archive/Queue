@@ -21,6 +21,7 @@ public class QueueTask: NSOperation {
     public let created: NSDate
     public var started: NSDate?
     public var userInfo: AnyObject?
+    var error: NSError?
     
     var _executing: Bool = false
     var _finished: Bool = false
@@ -150,7 +151,8 @@ public class QueueTask: NSOperation {
         if (!executing) {
             return
         }
-        if let _ = error {
+        if let error = error {
+            self.error = error
             if ++retries >= queue.maxRetries {
                 cancel()
                 queue.log(LogLevel.Trace, msg: "Task \(taskID) failed \(queue.taskList.count) tasks left")

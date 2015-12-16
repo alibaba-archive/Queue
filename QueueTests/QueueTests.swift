@@ -22,7 +22,7 @@ class QueueTests: XCTestCase {
     }
     
     func testExample() {
-        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
+        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger(),completeClosure: nil)
         
         if queue.hasUnfinishedTask() {
             print("存在未完成任务")

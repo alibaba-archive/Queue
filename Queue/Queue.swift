@@ -16,15 +16,18 @@ public class Queue: NSOperationQueue {
     var taskList = [String: QueueTask]()
     let serializationProvider: QueueSerializationProvider?
     let logProvider: QueueLogProvider?
+    let completeClosure: TaskCompleteCallback?
     
     public required init(queueName: String, maxConcurrency: Int = 1,
         maxRetries: Int = 5,
         serializationProvider: QueueSerializationProvider? = nil,
-        logProvider: QueueLogProvider? = nil) {
+        logProvider: QueueLogProvider? = nil,
+        completeClosure: TaskCompleteCallback?) {
             
             self.maxRetries = maxRetries
             self.serializationProvider = serializationProvider
             self.logProvider = logProvider
+            self.completeClosure = completeClosure
             super.init()
             self.name = queueName
             self.maxConcurrentOperationCount = maxConcurrency
@@ -111,6 +114,10 @@ public class Queue: NSOperationQueue {
     func taskComplete(op: NSOperation) {
         if let task = op as? QueueTask {
             taskList.removeValueForKey(task.taskID)
+            
+            if let handle = completeClosure {
+                handle(task, task.error)
+            }
             
             if let sp = serializationProvider {
                 sp.removeTask(task.taskID, queue: task.queue)

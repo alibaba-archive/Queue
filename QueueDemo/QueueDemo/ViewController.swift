@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
+        let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 5, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger(), completeClosure: taskComplete)
         queue.addTaskCallback("Create") { (task) -> Void in
             sleep(1)
             print("finish create task")
@@ -48,6 +48,14 @@ class ViewController: UIViewController {
         queue.start()
     }
 
+    func taskComplete(task: QueueTask, error: NSError?) {
+        if let error = error {
+            print("failed \(error)")
+        } else {
+            print("successfully")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
