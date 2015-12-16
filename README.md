@@ -1,4 +1,6 @@
-# queue
+# Queue
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 a task queue with local persistent by Swift 2.0
 
 #Overview
