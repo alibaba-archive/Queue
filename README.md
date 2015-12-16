@@ -14,6 +14,9 @@ Dependencies
 Task persistence (via protocol)
 Retries (exponential back-off)
 
+#Minimum
+iOS 8.0
+
 #Motivation
 
 With a good queuing solution you can provide a much better user experience in areas such as:
