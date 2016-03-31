@@ -34,10 +34,7 @@ class ViewController: UIViewController {
             taskNUmber = 100
         }
         
-        var i = 0
-        for i = 0; i < taskNUmber; i++ {
-            
-            
+        for _ in 0...taskNUmber {
             let task = QueueTask(queue: queue, type: "Create", userInfo: nil, retries: 0)
             let taskDelete = QueueTask(queue: queue, type: "Delete", userInfo: nil, retries: 0)
             queue.addOperation(taskDelete)
