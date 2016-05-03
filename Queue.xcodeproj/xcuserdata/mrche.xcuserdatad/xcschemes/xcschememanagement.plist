@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Queue WatchOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Queue.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,11 +17,16 @@
 		<key>QueueTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E529A39E1CD9089A0078C6BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E55AFA051C192E2A001C26B3</key>
 		<dict>
 			<key>primary</key>
