@@ -6,7 +6,7 @@
 //  Copyright © 2015 HarriesChen. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public enum LogLevel: Int {
     case Trace

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E5C2C39F1C181528003348D8"
-               BuildableName = "Queue.framework"
-               BlueprintName = "Queue"
+               BuildableName = "Queue-iOS.framework"
+               BlueprintName = "Queue-iOS"
                ReferencedContainer = "container:Queue.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E55AFA051C192E2A001C26B3"
-               BuildableName = "QueueTests.xctest"
-               BlueprintName = "QueueTests"
-               ReferencedContainer = "container:Queue.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E5C2C39F1C181528003348D8"
-            BuildableName = "Queue.framework"
-            BlueprintName = "Queue"
-            ReferencedContainer = "container:Queue.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -65,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E5C2C39F1C181528003348D8"
-            BuildableName = "Queue.framework"
-            BlueprintName = "Queue"
+            BuildableName = "Queue-iOS.framework"
+            BlueprintName = "Queue-iOS"
             ReferencedContainer = "container:Queue.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E5C2C39F1C181528003348D8"
-            BuildableName = "Queue.framework"
-            BlueprintName = "Queue"
+            BuildableName = "Queue-iOS.framework"
+            BlueprintName = "Queue-iOS"
             ReferencedContainer = "container:Queue.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

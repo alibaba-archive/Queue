@@ -6,7 +6,7 @@
 //  Copyright © 2015 HarriesChen. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Queue.
 FOUNDATION_EXPORT double QueueVersionNumber;

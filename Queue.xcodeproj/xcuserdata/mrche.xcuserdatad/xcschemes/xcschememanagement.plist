@@ -4,25 +4,40 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Queue-OSX.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Queue-iOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>Queue-watchOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Queue.xcscheme_^#shared#^_</key>
+		<key>QueueTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>QueueTests.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>E529A39E1CD9089A0078C6BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E546B5A71CD9B83000B6C81B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E546B5B01CD9B83000B6C81B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
