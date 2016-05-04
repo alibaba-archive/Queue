@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E529A39E1CD9089A0078C6BE"
-               BuildableName = "Queue WatchOS.framework"
-               BlueprintName = "Queue WatchOS"
+               BuildableName = "Queue.framework"
+               BlueprintName = "Queue-watchOS"
                ReferencedContainer = "container:Queue.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E529A39E1CD9089A0078C6BE"
-            BuildableName = "Queue WatchOS.framework"
-            BlueprintName = "Queue WatchOS"
+            BuildableName = "Queue.framework"
+            BlueprintName = "Queue-watchOS"
             ReferencedContainer = "container:Queue.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E529A39E1CD9089A0078C6BE"
-            BuildableName = "Queue WatchOS.framework"
-            BlueprintName = "Queue WatchOS"
+            BuildableName = "Queue.framework"
+            BlueprintName = "Queue-watchOS"
             ReferencedContainer = "container:Queue.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

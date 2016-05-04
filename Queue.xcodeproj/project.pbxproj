@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E529A3A21CD9089A0078C6BE /* Queue WatchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E529A3A11CD9089A0078C6BE /* Queue WatchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E546B5691CD9752900B6C81B /* Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C3A31C181528003348D8 /* Queue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E546B59D1CD9B51E00B6C81B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C3AB1C181A16003348D8 /* Queue.swift */; };
+		E546B59E1CD9B52100B6C81B /* QueueTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA001C192017001C26B3 /* QueueTask.swift */; };
+		E546B59F1CD9B52400B6C81B /* QueueSerializationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA311C194B65001C26B3 /* QueueSerializationProvider.swift */; };
+		E546B5A01CD9B52600B6C81B /* NSUserDefaultsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */; };
+		E546B5A11CD9B52900B6C81B /* QueueLogProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF3F9E1C19715100704547 /* QueueLogProvider.swift */; };
+		E546B5A21CD9B52C00B6C81B /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF3FA01C19722F00704547 /* ConsoleLogger.swift */; };
 		E55AFA011C192017001C26B3 /* QueueTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA001C192017001C26B3 /* QueueTask.swift */; };
 		E55AFA091C192E2A001C26B3 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA081C192E2A001C26B3 /* QueueTests.swift */; };
 		E55AFA0B1C192E2A001C26B3 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C2C3A01C181528003348D8 /* Queue.framework */; };
@@ -31,8 +37,6 @@
 
 /* Begin PBXFileReference section */
 		E529A39F1CD9089A0078C6BE /* Queue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Queue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E529A3A11CD9089A0078C6BE /* Queue WatchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Queue WatchOS.h"; sourceTree = "<group>"; };
-		E529A3A31CD9089A0078C6BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E55AFA001C192017001C26B3 /* QueueTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTask.swift; sourceTree = "<group>"; };
 		E55AFA061C192E2A001C26B3 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55AFA081C192E2A001C26B3 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -73,15 +77,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E529A3A01CD9089A0078C6BE /* Queue WatchOS */ = {
-			isa = PBXGroup;
-			children = (
-				E529A3A11CD9089A0078C6BE /* Queue WatchOS.h */,
-				E529A3A31CD9089A0078C6BE /* Info.plist */,
-			);
-			path = "Queue WatchOS";
-			sourceTree = "<group>";
-		};
 		E55AFA071C192E2A001C26B3 /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +91,6 @@
 			children = (
 				E5C2C3A21C181528003348D8 /* Queue */,
 				E55AFA071C192E2A001C26B3 /* QueueTests */,
-				E529A3A01CD9089A0078C6BE /* Queue WatchOS */,
 				E5C2C3A11C181528003348D8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -133,7 +127,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E529A3A21CD9089A0078C6BE /* Queue WatchOS.h in Headers */,
+				E546B5691CD9752900B6C81B /* Queue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,9 +142,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E529A39E1CD9089A0078C6BE /* Queue WatchOS */ = {
+		E529A39E1CD9089A0078C6BE /* Queue-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E529A3A61CD9089A0078C6BE /* Build configuration list for PBXNativeTarget "Queue WatchOS" */;
+			buildConfigurationList = E529A3A61CD9089A0078C6BE /* Build configuration list for PBXNativeTarget "Queue-watchOS" */;
 			buildPhases = (
 				E529A39A1CD9089A0078C6BE /* Sources */,
 				E529A39B1CD9089A0078C6BE /* Frameworks */,
@@ -161,7 +155,7 @@
 			);
 			dependencies = (
 			);
-			name = "Queue WatchOS";
+			name = "Queue-watchOS";
 			productName = "Queue WatchOS";
 			productReference = E529A39F1CD9089A0078C6BE /* Queue.framework */;
 			productType = "com.apple.product-type.framework";
@@ -236,7 +230,7 @@
 			projectRoot = "";
 			targets = (
 				E5C2C39F1C181528003348D8 /* Queue */,
-				E529A39E1CD9089A0078C6BE /* Queue WatchOS */,
+				E529A39E1CD9089A0078C6BE /* Queue-watchOS */,
 				E55AFA051C192E2A001C26B3 /* QueueTests */,
 			);
 		};
@@ -271,6 +265,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E546B59F1CD9B52400B6C81B /* QueueSerializationProvider.swift in Sources */,
+				E546B59E1CD9B52100B6C81B /* QueueTask.swift in Sources */,
+				E546B5A11CD9B52900B6C81B /* QueueLogProvider.swift in Sources */,
+				E546B5A21CD9B52C00B6C81B /* ConsoleLogger.swift in Sources */,
+				E546B59D1CD9B51E00B6C81B /* Queue.swift in Sources */,
+				E546B5A01CD9B52600B6C81B /* NSUserDefaultsSerializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,10 +315,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Queue WatchOS/Info.plist";
+				INFOPLIST_FILE = Queue/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harrieschen.Queue-WatchOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrieschen.Queue-watchOS";
 				PRODUCT_NAME = Queue;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -336,10 +336,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Queue WatchOS/Info.plist";
+				INFOPLIST_FILE = Queue/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harrieschen.Queue-WatchOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrieschen.Queue-watchOS";
 				PRODUCT_NAME = Queue;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -499,13 +499,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E529A3A61CD9089A0078C6BE /* Build configuration list for PBXNativeTarget "Queue WatchOS" */ = {
+		E529A3A61CD9089A0078C6BE /* Build configuration list for PBXNativeTarget "Queue-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E529A3A41CD9089A0078C6BE /* Debug */,
 				E529A3A51CD9089A0078C6BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E55AFA0E1C192E2A001C26B3 /* Build configuration list for PBXNativeTarget "QueueTests" */ = {
 			isa = XCConfigurationList;
