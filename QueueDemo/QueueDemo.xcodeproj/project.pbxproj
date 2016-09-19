@@ -7,15 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		868DE6F01D8FD59C00248631 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868DE6EF1D8FD59C00248631 /* Queue.framework */; };
+		868DE6F11D8FD59C00248631 /* Queue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 868DE6EF1D8FD59C00248631 /* Queue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E55AFA201C1946C1001C26B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA1F1C1946C1001C26B3 /* AppDelegate.swift */; };
 		E55AFA221C1946C1001C26B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA211C1946C1001C26B3 /* ViewController.swift */; };
 		E55AFA251C1946C1001C26B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E55AFA231C1946C1001C26B3 /* Main.storyboard */; };
 		E55AFA271C1946C1001C26B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E55AFA261C1946C1001C26B3 /* Assets.xcassets */; };
 		E55AFA2A1C1946C1001C26B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E55AFA281C1946C1001C26B3 /* LaunchScreen.storyboard */; };
-		E5EBD2CE1C1E5EBD00BCBE6A /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5EBD2CD1C1E5EBD00BCBE6A /* Queue.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		868DE6F21D8FD59C00248631 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				868DE6F11D8FD59C00248631 /* Queue.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		868DE6EF1D8FD59C00248631 /* Queue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Queue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55AFA1C1C1946C1001C26B3 /* QueueDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueueDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55AFA1F1C1946C1001C26B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E55AFA211C1946C1001C26B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +39,6 @@
 		E55AFA261C1946C1001C26B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E55AFA291C1946C1001C26B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E55AFA2B1C1946C1001C26B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5EBD2CD1C1E5EBD00BCBE6A /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Queue-ekvihtzrxbsizyecszasnebqznnf/Build/Products/Debug-iphoneos/Queue.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5EBD2CE1C1E5EBD00BCBE6A /* Queue.framework in Frameworks */,
+				868DE6F01D8FD59C00248631 /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,7 +56,7 @@
 		E55AFA131C1946C1001C26B3 = {
 			isa = PBXGroup;
 			children = (
-				E5EBD2CD1C1E5EBD00BCBE6A /* Queue.framework */,
+				868DE6EF1D8FD59C00248631 /* Queue.framework */,
 				E55AFA1E1C1946C1001C26B3 /* QueueDemo */,
 				E55AFA1D1C1946C1001C26B3 /* Products */,
 			);
@@ -78,6 +93,7 @@
 				E55AFA181C1946C1001C26B3 /* Sources */,
 				E55AFA191C1946C1001C26B3 /* Frameworks */,
 				E55AFA1A1C1946C1001C26B3 /* Resources */,
+				868DE6F21D8FD59C00248631 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -95,11 +111,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = HarriesChen;
 				TargetAttributes = {
 					E55AFA1B1C1946C1001C26B3 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9FKD467RME;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -179,8 +197,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -223,8 +243,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -243,6 +265,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -251,10 +274,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9FKD467RME;
 				INFOPLIST_FILE = QueueDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harrieschen.QueueDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -262,10 +287,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9FKD467RME;
 				INFOPLIST_FILE = QueueDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harrieschen.QueueDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -12,44 +12,47 @@ public typealias TaskCallBack = (QueueTask) -> Void
 public typealias TaskCompleteCallback = (QueueTask, NSError?) -> Void
 public typealias JSONDictionary = [String: AnyObject]
 
-public class QueueTask: NSOperation {
-    
-    public let queue: Queue
-    public var taskID: String
-    public var taskType: String
-    public var retries: Int
-    public let created: NSDate
-    public var started: NSDate?
-    public var userInfo: AnyObject?
+// swiftlint:disable line_length
+// swiftlint:disable variable_name
+
+open class QueueTask: Operation {
+
+    open let queue: Queue
+    open var taskID: String
+    open var taskType: String
+    open var retries: Int
+    open let created: Date
+    open var started: Date?
+    open var userInfo: AnyObject?
     var error: NSError?
-    
+
     var _executing: Bool = false
     var _finished: Bool = false
-    
-    public override var name: String? {get {return taskID } set { } }
-    
-    public override var executing: Bool {
+
+    open override var name: String? {get {return taskID } set { } }
+
+    open override var isExecuting: Bool {
         get { return _executing }
         set {
-            willChangeValueForKey("isExecuting")
+            willChangeValue(forKey: "isExecuting")
             _executing = newValue
-            didChangeValueForKey("isExecuting")
+            didChangeValue(forKey: "isExecuting")
         }
     }
-    public override var finished: Bool {
+    open override var isFinished: Bool {
         get { return _finished }
         set {
-            willChangeValueForKey("isFinished")
+            willChangeValue(forKey: "isFinished")
             _finished = newValue
-            didChangeValueForKey("isFinished")
+            didChangeValue(forKey: "isFinished")
         }
     }
-    
-    
+
+
     // MARK: - Init
     /**
      Initializes a new QueueTask with following paramsters
-     
+
      - parameter queue:    the queue the execute the task
      - parameter taskID:   A unique identifer for the task
      - parameter taskType: A type that will be used to group tasks together, tasks have to be generic with respect to their type
@@ -57,35 +60,35 @@ public class QueueTask: NSOperation {
      - parameter created:  When the task was created
      - parameter started:  When the task was started first time
      - parameter retries:  Number of times this task has been retries after failing
-     
+
      - returns: A new QueueTask
      */
-    private init(queue: Queue, taskID: String? = nil, taskType: String, userInfo: AnyObject? = nil,
-        created: NSDate = NSDate(), started: NSDate? = nil ,
+    fileprivate init(queue: Queue, taskID: String? = nil, taskType: String, userInfo: AnyObject? = nil,
+        created: Date = Date(), started: Date? = nil ,
         retries: Int = 0) {
             self.queue = queue
-            self.taskID = taskID ?? NSUUID().UUIDString
+            self.taskID = taskID ?? UUID().uuidString
             self.taskType = taskType
             self.retries = retries
             self.created = created
             self.userInfo = userInfo
         super.init()
     }
-    
+
     public convenience init(queue: Queue, type: String, userInfo: AnyObject? = nil, retries: Int = 0) {
         self.init(queue:queue, taskType: type, userInfo:userInfo, retries:retries)
     }
-    
+
     public convenience init?(dictionary: JSONDictionary, queue: Queue) {
         if  let taskID = dictionary["taskID"] as? String,
             let taskType = dictionary["taskType"] as? String,
             let data: AnyObject? = dictionary["userInfo"] as AnyObject??,
             let createdStr = dictionary["created"] as? String,
-            let startedStr: String? = dictionary["started"] as? String ?? nil,
-            let retries = dictionary["retries"] as? Int? ?? 0
-        {
-            let created = NSDate(dateString: createdStr) ?? NSDate()
-            let started = (startedStr != nil) ? NSDate(dateString: startedStr!) : nil
+            let startedStr = dictionary["started"] as? String,
+            let retries = dictionary["retries"] as? Int? ?? 0 {
+            let created = Date(dateString: createdStr) ?? Date()
+            let started = Date(dateString: startedStr)
+
             self.init(queue: queue, taskID: taskID, taskType: taskType, userInfo: data, created: created,
                 started: started, retries: retries)
         } else {
@@ -93,7 +96,7 @@ public class QueueTask: NSOperation {
             return nil
         }
     }
-    
+
     public convenience init?(json: String, queue: Queue) {
         do {
             if let dict = try fromJSON(json) as? [String: AnyObject] {
@@ -105,10 +108,10 @@ public class QueueTask: NSOperation {
             return nil
         }
     }
-    
-    public func toJSONString() -> String? {
+
+    open func toJSONString() -> String? {
         let dict = toDictionary()
-        
+
         let nsdict = NSMutableDictionary(capacity: dict.count)
         for (key, value) in dict {
             nsdict[key] = value ?? NSNull()
@@ -120,35 +123,38 @@ public class QueueTask: NSOperation {
             return nil
         }
     }
-    
-    public func toDictionary() -> [String: AnyObject?] {
+
+    open func toDictionary() -> [String: AnyObject?] {
         var dict = [String: AnyObject?]()
-        
-        dict["taskID"] = self.taskID
-        dict["taskType"] = self.taskType
-        dict["created"] = self.created.toISOString()
-        dict["started"] = (self.started != nil) ? self.started!.toISOString() : nil
-        dict["retries"] = self.retries
+
+        dict["taskID"] = self.taskID as AnyObject
+        dict["taskType"] = self.taskType as AnyObject
+        dict["created"] = self.created.toISOString() as AnyObject
+        dict["retries"] = self.retries as AnyObject
         dict["userInfo"] = self.userInfo
+
+        if let started = self.started {
+            dict["started"] = started.toISOString() as AnyObject
+        }
         return dict
     }
-    
+
     /**
      run the task on the queue
      */
     func run() {
-        if cancelled && !finished { finished = true }
-        if finished { return }
+        if isCancelled && !isFinished { isFinished = true }
+        if isFinished { return }
         queue.runTask(self)
     }
-    
+
     /**
      invoke the method to tell the queue if has error when the task complete
-     
+
      - parameter error: if the task failed, pass an error to indicate why
      */
-    public func complete(error: NSError?) {
-        if (!executing) {
+    open func complete(_ error: NSError?) {
+        if !isExecuting {
             return
         }
         if let error = error {
@@ -156,45 +162,45 @@ public class QueueTask: NSOperation {
             retries += 1
             if retries >= queue.maxRetries {
                 cancel()
-                queue.log(LogLevel.Trace, msg: "Task \(taskID) failed \(queue.taskList.count) tasks left")
+                queue.log(LogLevel.trace, msg: "Task \(taskID) failed \(queue.taskList.count) tasks left")
                 return
             }
-            queue.log(LogLevel.Debug, msg: "Task \(taskID) retry \(retries) times")
+            queue.log(LogLevel.debug, msg: "Task \(taskID) retry \(retries) times")
             self.run()
         } else {
-            queue.log(LogLevel.Trace, msg: "Task \(taskID) completed \(queue.taskList.count) tasks left")
-            finished = true
+            queue.log(LogLevel.trace, msg: "Task \(taskID) completed \(queue.taskList.count) tasks left")
+            isFinished = true
         }
     }
-    
+
     // MARK: - overide method
-    public override func start() {
+    open override func start() {
         super.start()
-        executing = true
+        isExecuting = true
         run()
     }
-    
-    public override func cancel() {
+
+    open override func cancel() {
         super.cancel()
-        finished = true
+        isFinished = true
     }
-    
-    
+
+
 }
 
 //  MARK: - NSDate extention
-extension NSDate {
-    convenience init?(dateString:String) {
-        let formatter = NSDateFormatter()
+extension Date {
+    init?(dateString: String) {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
-        if let d = formatter.dateFromString(dateString) {
-            self.init(timeInterval:0, sinceDate:d)
+        if let d = formatter.date(from: dateString) {
+            self.init(timeInterval:0, since:d)
         } else {
-            self.init(timeInterval:0, sinceDate:NSDate())
+            self.init(timeInterval:0, since:Date())
             return nil
         }
     }
-    
+
     var isoFormatter: ISOFormatter {
         if let formatter = objc_getAssociatedObject(self, "formatter") as? ISOFormatter {
             return formatter
@@ -204,40 +210,40 @@ extension NSDate {
             return formatter
         }
     }
-    
+
     func toISOString() -> String {
-        return self.isoFormatter.stringFromDate(self)
+        return self.isoFormatter.string(from: self)
     }
 }
 
-class ISOFormatter : NSDateFormatter {
+class ISOFormatter: DateFormatter {
     override init() {
         super.init()
         self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
-        self.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-        self.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)!
+        self.timeZone = TimeZone(secondsFromGMT: 0)
+        self.calendar = Calendar(identifier: Calendar.Identifier.iso8601)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }
 
 //  MARK: - Hepler
-private func toJSON(obj: AnyObject) throws -> String? {
-    let json = try NSJSONSerialization.dataWithJSONObject(obj, options: [])
-    return NSString(data: json, encoding: NSUTF8StringEncoding) as String?
+private func toJSON(_ obj: AnyObject) throws -> String? {
+    let json = try JSONSerialization.data(withJSONObject: obj, options: [])
+    return NSString(data: json, encoding: String.Encoding.utf8.rawValue) as String?
 }
 
-private func fromJSON(str: String) throws -> AnyObject? {
-    if let json = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-        let obj: AnyObject = try NSJSONSerialization.JSONObjectWithData(json, options: .AllowFragments)
+private func fromJSON(_ str: String) throws -> AnyObject? {
+    if let json = str.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+        let obj: AnyObject = try JSONSerialization.jsonObject(with: json, options: .allowFragments) as AnyObject
         return obj
     }
     return nil
 }
 
-private func runInBackgroundAfter(seconds: NSTimeInterval, callback:dispatch_block_t) {
-    let delta = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds) * Int64(NSEC_PER_SEC))
-    dispatch_after(delta, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), callback)
+private func runInBackgroundAfter(_ seconds: TimeInterval, callback:@escaping ()->()) {
+    let delta = DispatchTime.now() + Double(Int64(seconds) * Int64(NSEC_PER_SEC)) / Double(NSEC_PER_SEC)
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: delta, execute: callback)
 }

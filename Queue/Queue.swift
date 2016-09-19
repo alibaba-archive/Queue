@@ -8,22 +8,24 @@
 
 import Foundation
 
-public class Queue: NSOperationQueue {
-    
+// swiftlint:disable variable_name
+
+open class Queue: OperationQueue {
+
     /// the max times of retries when the task failing
-    public let maxRetries: Int
+    open let maxRetries: Int
     var taskCallbacks = [String: TaskCallBack]()
     var taskList = [String: QueueTask]()
     let serializationProvider: QueueSerializationProvider?
     let logProvider: QueueLogProvider?
     let completeClosure: TaskCompleteCallback?
-    
+
     public required init(queueName: String, maxConcurrency: Int = 1,
         maxRetries: Int = 5,
         serializationProvider: QueueSerializationProvider? = nil,
         logProvider: QueueLogProvider? = nil,
         completeClosure: TaskCompleteCallback?) {
-            
+
             self.maxRetries = maxRetries
             self.serializationProvider = serializationProvider
             self.logProvider = logProvider
@@ -32,31 +34,34 @@ public class Queue: NSOperationQueue {
             self.name = queueName
             self.maxConcurrentOperationCount = maxConcurrency
     }
-    
-    public func hasUnfinishedTask() -> Bool {
-        return serializationProvider?.deserialzeTasksInQueue(self).count > 0
+
+    open func hasUnfinishedTask() -> Bool {
+        if let provider = serializationProvider {
+            return provider.deserialzeTasks(self).count > 0
+        }
+        return false
     }
-    
+
     /**
      load the unfinish tasks to Queue
      */
-    public func loadSerializeTaskToQueue() {
+    open func loadSerializeTaskToQueue() {
         self.pause()
-        log(LogLevel.Trace, msg: "暂停队列 载入序列化任务")
-        let tasks = serializationProvider?.deserialzeTasksInQueue(self)
+        log(LogLevel.trace, msg: "暂停队列 载入序列化任务")
+        let tasks = serializationProvider?.deserialzeTasks(self)
         for task in tasks! {
             addDeserializedTask(task)
         }
-        log(LogLevel.Trace, msg: "载入成功 队列启动")
+        log(LogLevel.trace, msg: "载入成功 队列启动")
         self.start()
     }
-    
+
     /**
      addDeserializedTask
-     
+
      - parameter task: task array
      */
-    public func addDeserializedTask(task: QueueTask) {
+    open func addDeserializedTask(_ task: QueueTask) {
         if taskList[task.taskID] != nil {
             return
         }
@@ -64,26 +69,26 @@ public class Queue: NSOperationQueue {
         task.completionBlock = { self.taskComplete(task)}
         super.addOperation(task)
     }
-    
+
     /**
      register a callback for type of queuetask
-     
+
      - parameter taskType:     The task type for the callback
      - parameter taskCallBack: The callback for particular task
      */
-    public func addTaskCallback(taskType: String, taskCallBack: TaskCallBack) {
+    open func addTaskCallback(_ taskType: String, taskCallBack: @escaping TaskCallBack) {
         taskCallbacks[taskType] = taskCallBack
     }
-    
+
     /**
      add Queue task to the queue and it will automaticly invoke the start method
-     
+
      - parameter op: Queuetask
      */
-    public override func addOperation(op: NSOperation) {
+    open override func addOperation(_ op: Operation) {
         if let task = op as? QueueTask {
             if taskList[task.taskID] != nil {
-                log(.Warning, msg: "Attempted to add duplicate task\(task.taskID)")
+                log(.warning, msg: "Attempted to add duplicate task\(task.taskID)")
             }
             taskList[task.taskID] = task
             if  let sp = serializationProvider,
@@ -94,39 +99,38 @@ public class Queue: NSOperationQueue {
         op.completionBlock = { self.taskComplete(op) }
         super.addOperation(op)
     }
-    
-    public func start() {
-        self.suspended = false
+
+    open func start() {
+        self.isSuspended = false
     }
-    
-    public func pause() {
-        self.suspended = true
+
+    open func pause() {
+        self.isSuspended = true
     }
-    
-    func runTask(task: QueueTask) {
+
+    func runTask(_ task: QueueTask) {
         if let callback = taskCallbacks[task.taskType] {
              callback(task)
         } else {
-            log(LogLevel.Error, msg: "no callback registerd for task")
+            log(LogLevel.error, msg: "no callback registerd for task")
         }
     }
-    
-    func taskComplete(op: NSOperation) {
+
+    func taskComplete(_ op: Operation) {
         if let task = op as? QueueTask {
-            taskList.removeValueForKey(task.taskID)
-            
+            taskList.removeValue(forKey: task.taskID)
+
             if let handle = completeClosure {
                 handle(task, task.error)
             }
-            
+
             if let sp = serializationProvider {
                 sp.removeTask(task.taskID, queue: task.queue)
             }
         }
     }
-    
-    func log(level: LogLevel, msg: String) {
+
+    func log(_ level: LogLevel, msg: String) {
         logProvider?.log(level, msg: msg)
     }
-
 }

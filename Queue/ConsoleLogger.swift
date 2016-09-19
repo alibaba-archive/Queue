@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class ConsoleLogger: QueueLogProvider {
-    
+open class ConsoleLogger: QueueLogProvider {
+
     public init() { }
-    
-    public func log(level: LogLevel, msg: String) {
+
+    open func log(_ level: LogLevel, msg: String) {
         print("[\(level.toString())] \(msg)")
     }
 }

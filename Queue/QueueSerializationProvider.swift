@@ -9,8 +9,10 @@
 /**
 *  comfire to this protocol to provide serialization Queue
 */
+
 public protocol QueueSerializationProvider {
-    func serializeTask(task: QueueTask, queueName: String)
-    func deserialzeTasksInQueue(queue: Queue) -> [QueueTask]
-    func removeTask(taskID: String, queue: Queue)
+    func serializeTask(_ task: QueueTask, queueName: String)
+    func deserialzeTasks(_ queue: Queue) -> [QueueTask]
+    func removeTask(_ taskID: String, queue: Queue)
 }
+
