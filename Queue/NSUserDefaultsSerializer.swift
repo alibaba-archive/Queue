@@ -9,16 +9,16 @@
 import Foundation
 
 /// comfire the QueueSerializationProvider protocol to persistent the queue to the NSUserdefualts
-public class NSUserDefaultsSerializer: QueueSerializationProvider {
+open class NSUserDefaultsSerializer: QueueSerializationProvider {
 
     public init() { }
-    
-    public func serializeTask(task: QueueTask, queueName: String) {
+
+    open func serializeTask(_ task: QueueTask, queueName: String) {
         if let serialized = task.toJSONString() {
-            let defaults = NSUserDefaults.standardUserDefaults()
+            let defaults = UserDefaults.standard
             var stringArray: [String]
-            
-            if let curStringArray = defaults.stringArrayForKey(queueName) {
+
+            if let curStringArray = defaults.stringArray(forKey: queueName) {
                 stringArray = curStringArray
                 stringArray.append(serialized)
             } else {
@@ -31,14 +31,14 @@ public class NSUserDefaultsSerializer: QueueSerializationProvider {
             print("序列化失败")
         }
     }
-    
-    public func deserialzeTasksInQueue(queue: Queue) -> [QueueTask] {
-        let defaults = NSUserDefaults.standardUserDefaults()
+
+    open func deserialzeTasks(_ queue: Queue) -> [QueueTask] {
+        let defaults = UserDefaults.standard
         if  let queneName = queue.name,
-            let stringArray = defaults.stringArrayForKey(queneName) {
+            let stringArray = defaults.stringArray(forKey: queneName) {
                 print(stringArray.count)
                     //.map { return QueueTask(json: $0, queue: queue)})
-                
+
                 return stringArray
                     .map { return QueueTask(json: $0, queue: queue)}
                     .filter { return $0 != nil }
@@ -46,16 +46,16 @@ public class NSUserDefaultsSerializer: QueueSerializationProvider {
         }
         return []
     }
-    
-    public func removeTask(taskID: String, queue: Queue) {
+
+    open func removeTask(_ taskID: String, queue: Queue) {
         if let queueName = queue.name {
-            var curArray: [QueueTask] = deserialzeTasksInQueue(queue)
+            var curArray: [QueueTask] = deserialzeTasks(queue)
             curArray = curArray.filter {return $0.taskID != taskID }
             let stringArray = curArray
                 .map {return $0.toJSONString() }
                 .filter { return $0 != nil}
                 .map { return $0! }
-            NSUserDefaults.standardUserDefaults().setValue(stringArray, forKey: queueName)
+            UserDefaults.standard.setValue(stringArray, forKey: queueName)
         }
     }
 }

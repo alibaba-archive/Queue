@@ -9,23 +9,23 @@
 import Foundation
 
 public enum LogLevel: Int {
-    case Trace
-    case Debug
-    case Info
-    case Warning
-    case Error
-    
+    case trace
+    case debug
+    case info
+    case warning
+    case error
+
     public func toString() -> String {
-        switch (self) {
-        case .Trace:   return "Trace"
-        case .Debug:   return "Debug"
-        case .Info:    return "Info"
-        case .Warning: return "Warning"
-        case .Error:   return "Error"
+        switch self {
+        case .trace:   return "Trace"
+        case .debug:   return "Debug"
+        case .info:    return "Info"
+        case .warning: return "Warning"
+        case .error:   return "Error"
         }
     }
 }
 
 public protocol QueueLogProvider {
-    func log(level: LogLevel, msg: String)
+    func log(_ level: LogLevel, msg: String)
 }
