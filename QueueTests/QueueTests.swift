@@ -31,8 +31,7 @@ class QueueTests: XCTestCase {
         }
 
         queue.loadSerializeTaskToQueue()
-        var i = 0
-        for i = 0; i < 100; i++ {
+        for _ in 0..<100 {
             queue.addTaskCallback("Create") { (task) -> Void in
 
                 task.complete(nil)
@@ -61,7 +60,7 @@ class QueueTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

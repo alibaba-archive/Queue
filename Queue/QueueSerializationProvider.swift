@@ -15,4 +15,3 @@ public protocol QueueSerializationProvider {
     func deserialzeTasks(_ queue: Queue) -> [QueueTask]
     func removeTask(_ taskID: String, queue: Queue)
 }
-
