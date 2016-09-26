@@ -9,8 +9,8 @@
 import Foundation
 
 public typealias TaskCallBack = (QueueTask) -> Void
-public typealias TaskCompleteCallback = (QueueTask, NSError?) -> Void
-public typealias JSONDictionary = [String: AnyObject]
+public typealias TaskCompleteCallback = (QueueTask, Error?) -> Void
+public typealias JSONDictionary = [String: Any]
 
 // swiftlint:disable line_length
 // swiftlint:disable variable_name
@@ -23,8 +23,8 @@ open class QueueTask: Operation {
     open var retries: Int
     open let created: Date
     open var started: Date?
-    open var userInfo: AnyObject?
-    var error: NSError?
+    open var userInfo: Any?
+    var error: Error?
 
     var _executing: Bool = false
     var _finished: Bool = false
@@ -63,7 +63,7 @@ open class QueueTask: Operation {
 
      - returns: A new QueueTask
      */
-    fileprivate init(queue: Queue, taskID: String? = nil, taskType: String, userInfo: AnyObject? = nil,
+    fileprivate init(queue: Queue, taskID: String? = nil, taskType: String, userInfo: Any? = nil,
         created: Date = Date(), started: Date? = nil ,
         retries: Int = 0) {
             self.queue = queue
@@ -75,14 +75,14 @@ open class QueueTask: Operation {
         super.init()
     }
 
-    public convenience init(queue: Queue, type: String, userInfo: AnyObject? = nil, retries: Int = 0) {
+    public convenience init(queue: Queue, type: String, userInfo: Any? = nil, retries: Int = 0) {
         self.init(queue:queue, taskType: type, userInfo:userInfo, retries:retries)
     }
 
     public convenience init?(dictionary: JSONDictionary, queue: Queue) {
         if  let taskID = dictionary["taskID"] as? String,
             let taskType = dictionary["taskType"] as? String,
-            let data: AnyObject? = dictionary["userInfo"] as AnyObject??,
+            let data = dictionary["userInfo"],
             let createdStr = dictionary["created"] as? String,
             let startedStr = dictionary["started"] as? String,
             let retries = dictionary["retries"] as? Int? ?? 0 {
@@ -99,7 +99,7 @@ open class QueueTask: Operation {
 
     public convenience init?(json: String, queue: Queue) {
         do {
-            if let dict = try fromJSON(json) as? [String: AnyObject] {
+            if let dict = try fromJSON(json) as? [String: Any] {
                 self.init(dictionary: dict, queue: queue)
             } else {
                 return nil
@@ -124,17 +124,17 @@ open class QueueTask: Operation {
         }
     }
 
-    open func toDictionary() -> [String: AnyObject?] {
-        var dict = [String: AnyObject?]()
+    open func toDictionary() -> [String: Any?] {
+        var dict = [String: Any?]()
 
-        dict["taskID"] = self.taskID as AnyObject
-        dict["taskType"] = self.taskType as AnyObject
-        dict["created"] = self.created.toISOString() as AnyObject
-        dict["retries"] = self.retries as AnyObject
+        dict["taskID"] = self.taskID
+        dict["taskType"] = self.taskType
+        dict["created"] = self.created.toISOString()
+        dict["retries"] = self.retries
         dict["userInfo"] = self.userInfo
 
         if let started = self.started {
-            dict["started"] = started.toISOString() as AnyObject
+            dict["started"] = started.toISOString()
         }
         return dict
     }
@@ -153,7 +153,7 @@ open class QueueTask: Operation {
 
      - parameter error: if the task failed, pass an error to indicate why
      */
-    open func complete(_ error: NSError?) {
+    open func complete(_ error: Error?) {
         if !isExecuting {
             return
         }
@@ -230,14 +230,14 @@ class ISOFormatter: DateFormatter {
 }
 
 //  MARK: - Hepler
-private func toJSON(_ obj: AnyObject) throws -> String? {
+private func toJSON(_ obj: Any) throws -> String? {
     let json = try JSONSerialization.data(withJSONObject: obj, options: [])
     return NSString(data: json, encoding: String.Encoding.utf8.rawValue) as String?
 }
 
-private func fromJSON(_ str: String) throws -> AnyObject? {
+private func fromJSON(_ str: String) throws -> Any? {
     if let json = str.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-        let obj: AnyObject = try JSONSerialization.jsonObject(with: json, options: .allowFragments) as AnyObject
+        let obj: Any = try JSONSerialization.jsonObject(with: json, options: .allowFragments) as Any
         return obj
     }
     return nil

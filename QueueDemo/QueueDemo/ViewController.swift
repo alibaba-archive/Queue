@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         queue.start()
     }
 
-    func taskComplete(task: QueueTask, error: NSError?) {
+    func taskComplete(task: QueueTask, error: Error?) {
         if let error = error {
             print("failed \(error)")
         } else {
