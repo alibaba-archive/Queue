@@ -20,11 +20,12 @@ open class Queue: OperationQueue {
     let logProvider: QueueLogProvider?
     let completeClosure: TaskCompleteCallback?
 
-    public required init(queueName: String, maxConcurrency: Int = 1,
-        maxRetries: Int = 5,
-        serializationProvider: QueueSerializationProvider? = nil,
-        logProvider: QueueLogProvider? = nil,
-        completeClosure: TaskCompleteCallback?) {
+    public required init(queueName: String,
+                         maxConcurrency: Int = 1,
+                         maxRetries: Int = 5,
+                         serializationProvider: QueueSerializationProvider? = nil,
+                         logProvider: QueueLogProvider? = nil,
+                         completeClosure: TaskCompleteCallback?) {
 
             self.maxRetries = maxRetries
             self.serializationProvider = serializationProvider

@@ -48,7 +48,6 @@ open class QueueTask: Operation {
         }
     }
 
-
     // MARK: - Init
     /**
      Initializes a new QueueTask with following paramsters
@@ -64,8 +63,8 @@ open class QueueTask: Operation {
      - returns: A new QueueTask
      */
     fileprivate init(queue: Queue, taskID: String? = nil, taskType: String, userInfo: Any? = nil,
-        created: Date = Date(), started: Date? = nil ,
-        retries: Int = 0) {
+                     created: Date = Date(), started: Date? = nil ,
+                     retries: Int = 0) {
             self.queue = queue
             self.taskID = taskID ?? UUID().uuidString
             self.taskType = taskType
@@ -184,11 +183,9 @@ open class QueueTask: Operation {
         super.cancel()
         isFinished = true
     }
-
-
 }
 
-//  MARK: - NSDate extention
+// MARK: - NSDate extention
 extension Date {
     init?(dateString: String) {
         let formatter = DateFormatter()
@@ -229,7 +226,7 @@ class ISOFormatter: DateFormatter {
     }
 }
 
-//  MARK: - Hepler
+// MARK: - Hepler
 private func toJSON(_ obj: Any) throws -> String? {
     let json = try JSONSerialization.data(withJSONObject: obj, options: [])
     return NSString(data: json, encoding: String.Encoding.utf8.rawValue) as String?
@@ -243,7 +240,7 @@ private func fromJSON(_ str: String) throws -> Any? {
     return nil
 }
 
-private func runInBackgroundAfter(_ seconds: TimeInterval, callback:@escaping ()->()) {
+private func runInBackgroundAfter(_ seconds: TimeInterval, callback: @escaping () -> Void) {
     let delta = DispatchTime.now() + Double(Int64(seconds) * Int64(NSEC_PER_SEC)) / Double(NSEC_PER_SEC)
     DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: delta, execute: callback)
 }
