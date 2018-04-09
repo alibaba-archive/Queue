@@ -75,7 +75,7 @@ open class QueueTask: Operation {
     }
 
     public convenience init(queue: Queue, type: String, userInfo: Any? = nil, retries: Int = 0) {
-        self.init(queue:queue, taskType: type, userInfo:userInfo, retries:retries)
+        self.init(queue: queue, taskType: type, userInfo: userInfo, retries: retries)
     }
 
     public convenience init?(dictionary: JSONDictionary, queue: Queue) {
@@ -191,9 +191,9 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z"
         if let d = formatter.date(from: dateString) {
-            self.init(timeInterval:0, since:d)
+            self.init(timeInterval: 0, since: d)
         } else {
-            self.init(timeInterval:0, since:Date())
+            self.init(timeInterval: 0, since: Date())
             return nil
         }
     }
