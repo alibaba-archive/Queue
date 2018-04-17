@@ -3,7 +3,7 @@
 
 a task queue with local persistent by Swift 2.0
 
-#Overview
+# Overview
 
 Queue is a subclass of NSOperationQueue so you get:
 
@@ -14,10 +14,10 @@ Dependencies
 Task persistence (via protocol)
 Retries (exponential back-off)
 
-#Minimum
+# Minimum
 iOS 8.0
 
-#Motivation
+# Motivation
 
 With a good queuing solution you can provide a much better user experience in areas such as:
 
@@ -27,16 +27,16 @@ Uploading data
 
 The actual code to perform the task gets passed to the queue in the form of a taskHandler closure. Each QueueTask must have a taskType key which corresponds to a specific taskCallback.
 
-#Example Code
+# Example Code
 
 For a thorough example see the demo project in the top level of the repository.
 
-##Create a queue
+## Create a queue
 
 ```
 let queue = Queue(queueName: "NetWorking", maxConcurrency: 1, maxRetries: 3, serializationProvider: NSUserDefaultsSerializer(),logProvider: ConsoleLogger())
 ```
-##Create a task
+## Create a task
 
 ```
 queue.addTaskCallback("Create") { (task) -> Void in
