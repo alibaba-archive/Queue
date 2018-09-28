@@ -14,7 +14,6 @@
 		E546B5A01CD9B52600B6C81B /* NSUserDefaultsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA331C194C8D001C26B3 /* NSUserDefaultsSerializer.swift */; };
 		E546B5A11CD9B52900B6C81B /* QueueLogProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF3F9E1C19715100704547 /* QueueLogProvider.swift */; };
 		E546B5A21CD9B52C00B6C81B /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF3FA01C19722F00704547 /* ConsoleLogger.swift */; };
-		E546B5B21CD9B83000B6C81B /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E546B5A81CD9B83000B6C81B /* Queue.framework */; };
 		E546B5BF1CD9B87600B6C81B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C3AB1C181A16003348D8 /* Queue.swift */; };
 		E546B5C01CD9B87900B6C81B /* QueueTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA001C192017001C26B3 /* QueueTask.swift */; };
 		E546B5C11CD9B87C00B6C81B /* QueueSerializationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AFA311C194B65001C26B3 /* QueueSerializationProvider.swift */; };
@@ -33,13 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E546B5B31CD9B83000B6C81B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E5C2C3971C181528003348D8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E546B5A71CD9B83000B6C81B;
-			remoteInfo = "Queue-OSX";
-		};
 		E55AFA0C1C192E2A001C26B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5C2C3971C181528003348D8 /* Project object */;
@@ -52,7 +44,6 @@
 /* Begin PBXFileReference section */
 		E529A39F1CD9089A0078C6BE /* Queue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Queue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E546B5A81CD9B83000B6C81B /* Queue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Queue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E546B5B11CD9B83000B6C81B /* Queue-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Queue-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55AFA001C192017001C26B3 /* QueueTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTask.swift; sourceTree = "<group>"; };
 		E55AFA061C192E2A001C26B3 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55AFA081C192E2A001C26B3 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -79,14 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E546B5AE1CD9B83000B6C81B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E546B5B21CD9B83000B6C81B /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +116,6 @@
 				E55AFA061C192E2A001C26B3 /* QueueTests.xctest */,
 				E529A39F1CD9089A0078C6BE /* Queue.framework */,
 				E546B5A81CD9B83000B6C81B /* Queue.framework */,
-				E546B5B11CD9B83000B6C81B /* Queue-OSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,24 +202,6 @@
 			productReference = E546B5A81CD9B83000B6C81B /* Queue.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E546B5B01CD9B83000B6C81B /* Queue-OSXTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E546B5BC1CD9B83000B6C81B /* Build configuration list for PBXNativeTarget "Queue-OSXTests" */;
-			buildPhases = (
-				E546B5AD1CD9B83000B6C81B /* Sources */,
-				E546B5AE1CD9B83000B6C81B /* Frameworks */,
-				E546B5AF1CD9B83000B6C81B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E546B5B41CD9B83000B6C81B /* PBXTargetDependency */,
-			);
-			name = "Queue-OSXTests";
-			productName = "Queue-OSXTests";
-			productReference = E546B5B11CD9B83000B6C81B /* Queue-OSXTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		E55AFA051C192E2A001C26B3 /* QueueTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E55AFA0E1C192E2A001C26B3 /* Build configuration list for PBXNativeTarget "QueueTests" */;
@@ -287,15 +251,11 @@
 				TargetAttributes = {
 					E529A39E1CD9089A0078C6BE = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 					E546B5A71CD9B83000B6C81B = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
-					};
-					E546B5B01CD9B83000B6C81B = {
-						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 					E55AFA051C192E2A001C26B3 = {
 						CreatedOnToolsVersion = 7.2;
@@ -323,7 +283,6 @@
 				E529A39E1CD9089A0078C6BE /* Queue-watchOS */,
 				E546B5A71CD9B83000B6C81B /* Queue-OSX */,
 				E55AFA051C192E2A001C26B3 /* QueueTests */,
-				E546B5B01CD9B83000B6C81B /* Queue-OSXTests */,
 			);
 		};
 /* End PBXProject section */
@@ -337,13 +296,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E546B5A61CD9B83000B6C81B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E546B5AF1CD9B83000B6C81B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -435,13 +387,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E546B5AD1CD9B83000B6C81B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E55AFA021C192E2A001C26B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -466,11 +411,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E546B5B41CD9B83000B6C81B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E546B5A71CD9B83000B6C81B /* Queue-OSX */;
-			targetProxy = E546B5B31CD9B83000B6C81B /* PBXContainerItemProxy */;
-		};
 		E55AFA0D1C192E2A001C26B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5C2C39F1C181528003348D8 /* Queue-iOS */;
@@ -496,7 +436,7 @@
 				PRODUCT_NAME = Queue;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -519,7 +459,7 @@
 				PRODUCT_NAME = Queue;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -544,7 +484,7 @@
 				PRODUCT_NAME = Queue;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -567,39 +507,7 @@
 				PRODUCT_NAME = Queue;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		E546B5BD1CD9B83000B6C81B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Queue-OSXTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harrieschen.Queue-OSXTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		E546B5BE1CD9B83000B6C81B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Queue-OSXTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harrieschen.Queue-OSXTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -797,15 +705,6 @@
 			buildConfigurations = (
 				E546B5BA1CD9B83000B6C81B /* Debug */,
 				E546B5BB1CD9B83000B6C81B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E546B5BC1CD9B83000B6C81B /* Build configuration list for PBXNativeTarget "Queue-OSXTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E546B5BD1CD9B83000B6C81B /* Debug */,
-				E546B5BE1CD9B83000B6C81B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

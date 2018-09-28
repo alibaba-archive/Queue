@@ -13,7 +13,7 @@ import Foundation
 open class Queue: OperationQueue {
 
     /// the max times of retries when the task failing
-    open let maxRetries: Int
+    public let maxRetries: Int
     var taskCallbacks = [String: TaskCallBack]()
     var taskList = [String: QueueTask]()
     let serializationProvider: QueueSerializationProvider?

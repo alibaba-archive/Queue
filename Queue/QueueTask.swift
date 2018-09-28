@@ -17,11 +17,11 @@ public typealias JSONDictionary = [String: Any]
 
 open class QueueTask: Operation {
 
-    open let queue: Queue
+    public let queue: Queue
     open var taskID: String
     open var taskType: String
     open var retries: Int
-    open let created: Date
+    public let created: Date
     open var started: Date?
     open var userInfo: Any?
     var error: Error?
