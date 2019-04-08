@@ -29,7 +29,13 @@ open class QueueTask: Operation {
     var _executing: Bool = false
     var _finished: Bool = false
 
-    open override var name: String? {get {return taskID } set { } }
+    open override var name: String? {
+        get {
+            return taskID
+        }
+        set {
+        }
+    }
 
     open override var isExecuting: Bool {
         get { return _executing }
