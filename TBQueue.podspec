@@ -5,7 +5,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TBQueue'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'a task queue with local persistent by Swift'
   s.description      = <<-DESC
   a task queue with local persistent by Swift.
